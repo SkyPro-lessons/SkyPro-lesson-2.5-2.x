@@ -5,7 +5,8 @@ import site.telion.skypro_lesson_25_2x.model.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    Employee add(String firstName, String lastName);
+
+    Employee add(String firstName, String lastName, Integer department, Double salary);
 
     Employee remove(String firstName, String lastName);
 

@@ -1,10 +1,10 @@
 ﻿<hr>
 <h3>Добавить:</h3>
-<p><a href="/employee/add?firstname=Иван&lastname=Иванов">Добавить сотрудника: Иван Иванов</a></p>
-<p><a href="/employee/add?firstname=Денис&lastname=Фёдоров">Добавить сотрудника: Денис Фёдоров</a></p>
-<p><a href="/employee/add?firstname=Андрей&lastname=Коновалов">Добавить сотрудника: Андрей Коновалов</a></p>
-<p><a href="/employee/add?firstname=Игорь&lastname=Сумкин">Добавить сотрудника: Игорь Сумкин</a></p>
-<p><a href="/employee/add?firstname=Бильбо&lastname=Бэггинс">Добавить сотрудника: Бильбо Бэггинс</a></p>
+<p><a href="/employee/add?firstname=Иван&lastname=Иванов&department=2&salary=40000">Добавить сотрудника: Иван Иванов (2, 40000)</a></p>
+<p><a href="/employee/add?firstname=Денис&lastname=Фёдоров&department=1&salary=10000">Добавить сотрудника: Денис Фёдоров (1, 10000)</a></p>
+<p><a href="/employee/add?firstname=Андрей&lastname=Коновалов&department=2&salary=20000">Добавить сотрудника: Андрей Коновалов (2, 20000)</a></p>
+<p><a href="/employee/add?firstname=Игорь&lastname=Сумкин&department=1&salary=30000">Добавить сотрудника: Игорь Сумкин (1, 30000)</a></p>
+<p><a href="/employee/add?firstname=Бильбо&lastname=Бэггинс&department=3&salary=15000">Добавить сотрудника: Бильбо Бэггинс (3, 15000)</a></p>
 <hr>
 <h3>Удалить:</h3>
 <p><a href="/employee/remove?firstname=Иван&lastname=Иванов">Удалить сотрудника: Иван Иванов</a></p>
@@ -21,4 +21,22 @@
 <p><a href="/employee/find?firstname=Бильбо&lastname=Бэггинс">Найти сотрудника: Бильбо Бэггинс</a></p>
 <hr>
 <p><a href="/employee/printlist">Список сотрудников</a></p>
+<hr>
+
+<h3>Департамент max-salary:</h3>
+<p><a href="/department/max-salary?departmentId=1">Макс зарплата в 1 отделе</a></p>
+<p><a href="/department/max-salary?departmentId=2">Макс зарплата во 2 отделе</a></p>
+<p><a href="/department/max-salary?departmentId=3">Макс зарплата во 3 отделе</a></p>
+<hr>
+<h3>Департамент min-salary:</h3>
+<p><a href="/department/min-salary?departmentId=1">Мин зарплата в 1 отделе</a></p>
+<p><a href="/department/min-salary?departmentId=2">Мин зарплата во 2 отделе</a></p>
+<p><a href="/department/min-salary?departmentId=3">Мин зарплата во 3 отделе</a></p>
+<hr>
+<h3>Департамент all-employee:</h3>
+<p><a href="/department/all?departmentId=1">Сотрудники в 1 отделе</a></p>
+<p><a href="/department/all?departmentId=2">Сотрудники во 2 отделе</a></p>
+<p><a href="/department/all?departmentId=3">Сотрудники во 3 отделе</a></p>
+<hr>
+<p><a href="/department/all">Список сотрудников по отделам</a></p>
 <hr>
