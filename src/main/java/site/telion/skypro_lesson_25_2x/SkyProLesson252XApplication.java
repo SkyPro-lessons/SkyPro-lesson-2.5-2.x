@@ -1,4 +1,4 @@
-package site.telion.skyprolesson252x;
+package site.telion.skypro_lesson_25_2x;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
