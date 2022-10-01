@@ -5,16 +5,14 @@ import site.telion.skypro_lesson_25_2x.exception.EmployeeAlreadyAddedException;
 import site.telion.skypro_lesson_25_2x.exception.EmployeeNotFoundException;
 import site.telion.skypro_lesson_25_2x.model.Employee;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private List<Employee> employeeList;
+    private Map<String, Employee> employees;
 
     public EmployeeServiceImpl() {
-        this.employeeList = new ArrayList<>();
+        this.employees = new HashMap<>();
     }
 
     @Override
@@ -23,10 +21,10 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null; // todo: возвращать ошибку?
         }
         Employee employee = new Employee(firstName, lastName);
-        if (employeeList.contains(employee)) {
+        if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник есть в базе");
         }
-        employeeList.add(employee);
+        employees.put(employee.getFullName(), employee);
         return employee;
     }
 
@@ -36,8 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null; // todo: возвращать ошибку?
         }
         Employee employee = new Employee(firstName, lastName);
-        if (employeeList.contains(employee)) {
-            employeeList.remove(employee);
+        if (employees.containsKey(employee.getFullName())) {
+            employees.remove(employee.getFullName());
         }
         return employee;
     }
@@ -48,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null; // todo: возвращать ошибку?
         }
         Employee employee = new Employee(firstName, lastName);
-        if (employeeList.contains(employee)) {
+        if (employees.containsKey(employee.getFullName())) {
             return employee;
         }
         throw new EmployeeNotFoundException("Сотрудник с такими данными не найден");
@@ -56,6 +54,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> printList() {
-        return Collections.unmodifiableList(employeeList);
+        return new ArrayList<Employee>(employees.values());
     }
 }
