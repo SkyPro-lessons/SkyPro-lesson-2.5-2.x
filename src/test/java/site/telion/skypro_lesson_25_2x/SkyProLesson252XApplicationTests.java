@@ -1,4 +1,4 @@
-package site.telion.skyprolesson252x;
+package site.telion.skypro_lesson_25_2x;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
