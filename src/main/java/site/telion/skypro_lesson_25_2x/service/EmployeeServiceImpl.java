@@ -9,18 +9,18 @@ import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private Map<String, Employee> employees;
+    private final Map<String, Employee> employees;
 
     public EmployeeServiceImpl() {
         this.employees = new HashMap<>();
     }
 
     @Override
-    public Employee add(String firstName, String lastName) {
-        if (firstName == null || lastName == null) {
+    public Employee add(String firstName, String lastName, Integer department, Double salary) {
+        if (firstName == null || lastName == null || department == null || salary == null) {
             return null; // todo: возвращать ошибку?
         }
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник есть в базе");
         }
@@ -34,9 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null; // todo: возвращать ошибку?
         }
         Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName())) {
-            employees.remove(employee.getFullName());
-        }
+        employees.remove(employee.getFullName());
         return employee;
     }
 
@@ -54,6 +52,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> printList() {
-        return new ArrayList<Employee>(employees.values());
+        return new ArrayList<>(employees.values());
     }
 }
