@@ -19,9 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee add(String firstName, String lastName, Integer department, Double salary) {
-        if (StringUtils.isAnyEmpty(firstName, lastName) || department == null || salary == null) {
-            throw new EmptyValueException("Передано пустое значение");
-        }
+        validateInputTextValue(firstName, lastName);
         firstName = StringUtils.capitalize(firstName);
         lastName = StringUtils.capitalize(lastName);
 
@@ -35,9 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee remove(String firstName, String lastName) {
-        if (StringUtils.isAnyEmpty(firstName, lastName)) {
-            throw new EmptyValueException("Передано пустое значение");
-        }
+        validateInputTextValue(firstName, lastName);
         Employee employee = new Employee(firstName, lastName);
         employees.remove(employee.getFullName());
         return employee;
@@ -45,9 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee find(String firstName, String lastName) {
-        if (StringUtils.isAnyEmpty(firstName, lastName)) {
-            throw new EmptyValueException("Передано пустое значение");
-        }
+        validateInputTextValue(firstName, lastName);
         Employee employee = new Employee(firstName, lastName);
         if (employees.containsKey(employee.getFullName())) {
             return employee;
@@ -58,5 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> printList() {
         return new ArrayList<>(employees.values());
+    }
+
+    private void validateInputTextValue(String firstName, String lastName) {
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
+            throw new EmptyValueException("Передано пустое значение");
+        }
     }
 }
