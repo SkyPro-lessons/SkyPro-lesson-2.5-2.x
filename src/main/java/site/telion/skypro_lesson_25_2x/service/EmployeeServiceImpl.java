@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee remove(String firstName, String lastName) {
-        if (firstName == null || lastName == null) {
+        if (StringUtils.isAnyEmpty(firstName, lastName)) {
             return null; // todo: возвращать ошибку?
         }
         Employee employee = new Employee(firstName, lastName);
@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee find(String firstName, String lastName) {
-        if (firstName == null || lastName == null) {
+        if (StringUtils.isAnyEmpty(firstName, lastName)) {
             return null; // todo: возвращать ошибку?
         }
         Employee employee = new Employee(firstName, lastName);
