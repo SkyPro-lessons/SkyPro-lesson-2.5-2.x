@@ -1,8 +1,10 @@
 package site.telion.skypro_lesson_25_2x.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import site.telion.skypro_lesson_25_2x.exception.EmployeeAlreadyAddedException;
 import site.telion.skypro_lesson_25_2x.exception.EmployeeNotFoundException;
+import site.telion.skypro_lesson_25_2x.exception.EmptyValueException;
 import site.telion.skypro_lesson_25_2x.model.Employee;
 
 import java.util.*;
@@ -17,9 +19,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee add(String firstName, String lastName, Integer department, Double salary) {
-        if (firstName == null || lastName == null || department == null || salary == null) {
-            return null; // todo: возвращать ошибку?
+        if (StringUtils.isAnyEmpty(firstName, lastName) || department == null || salary == null) {
+            throw new EmptyValueException("Передано пустое значение");
         }
+        firstName = StringUtils.capitalize(firstName);
+        lastName = StringUtils.capitalize(lastName);
+
         Employee employee = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник есть в базе");
