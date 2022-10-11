@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee remove(String firstName, String lastName) {
         if (StringUtils.isAnyEmpty(firstName, lastName)) {
-            return null; // todo: возвращать ошибку?
+            throw new EmptyValueException("Передано пустое значение");
         }
         Employee employee = new Employee(firstName, lastName);
         employees.remove(employee.getFullName());
@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee find(String firstName, String lastName) {
         if (StringUtils.isAnyEmpty(firstName, lastName)) {
-            return null; // todo: возвращать ошибку?
+            throw new EmptyValueException("Передано пустое значение");
         }
         Employee employee = new Employee(firstName, lastName);
         if (employees.containsKey(employee.getFullName())) {
