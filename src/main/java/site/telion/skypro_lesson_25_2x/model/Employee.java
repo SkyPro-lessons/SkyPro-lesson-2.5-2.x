@@ -1,6 +1,7 @@
 package site.telion.skypro_lesson_25_2x.model;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 @Data
 public class Employee {
@@ -11,8 +12,8 @@ public class Employee {
     private Double salary;
 
     public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase());
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase());
         this.fullName = firstName + " " + lastName;
     }
 

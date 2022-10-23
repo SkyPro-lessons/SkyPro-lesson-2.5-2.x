@@ -1,8 +1,10 @@
 package site.telion.skypro_lesson_25_2x.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import site.telion.skypro_lesson_25_2x.exception.EmployeeAlreadyAddedException;
 import site.telion.skypro_lesson_25_2x.exception.EmployeeNotFoundException;
+import site.telion.skypro_lesson_25_2x.exception.EmptyValueException;
 import site.telion.skypro_lesson_25_2x.model.Employee;
 
 import java.util.*;
@@ -17,9 +19,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee add(String firstName, String lastName, Integer department, Double salary) {
-        if (firstName == null || lastName == null || department == null || salary == null) {
-            return null; // todo: возвращать ошибку?
-        }
+        validateInputTextValue(firstName, lastName);
+        firstName = StringUtils.capitalize(firstName);
+        lastName = StringUtils.capitalize(lastName);
+
         Employee employee = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник есть в базе");
@@ -30,9 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee remove(String firstName, String lastName) {
-        if (firstName == null || lastName == null) {
-            return null; // todo: возвращать ошибку?
-        }
+        validateInputTextValue(firstName, lastName);
         Employee employee = new Employee(firstName, lastName);
         employees.remove(employee.getFullName());
         return employee;
@@ -40,9 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee find(String firstName, String lastName) {
-        if (firstName == null || lastName == null) {
-            return null; // todo: возвращать ошибку?
-        }
+        validateInputTextValue(firstName, lastName);
         Employee employee = new Employee(firstName, lastName);
         if (employees.containsKey(employee.getFullName())) {
             return employee;
@@ -53,5 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> printList() {
         return new ArrayList<>(employees.values());
+    }
+
+    private void validateInputTextValue(String firstName, String lastName) {
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)) {
+            throw new EmptyValueException("Передано пустое значение");
+        }
     }
 }
