@@ -9,7 +9,7 @@ public class EmployeeAlreadyAddedException extends RuntimeException {
     }
 
     public EmployeeAlreadyAddedException(String message) {
-
+        super(message);
     }
 
     public EmployeeAlreadyAddedException(String message, Throwable cause) {
