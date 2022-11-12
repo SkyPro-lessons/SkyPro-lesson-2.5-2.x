@@ -59,4 +59,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmptyValueException("Передано пустое значение");
         }
     }
+
+    @Override
+    public Map<String, Employee> getEmployees() {
+        return employees;
+    }
 }

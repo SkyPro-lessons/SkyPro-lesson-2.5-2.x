@@ -2,6 +2,8 @@ package site.telion.skypro_lesson_25_2x.model;
 
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Data
 public class Employee {
@@ -23,4 +25,19 @@ public class Employee {
         this.salary = salary;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        return new EqualsBuilder().append(firstName, employee.firstName).append(lastName, employee.lastName).append(fullName, employee.fullName).append(department, employee.department).append(salary, employee.salary).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(firstName).append(lastName).append(fullName).append(department).append(salary).toHashCode();
+    }
 }
